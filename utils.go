@@ -14,7 +14,7 @@ import (
 func CheckPulseDetail(pd *otxapi.PulseDetail) {
 	indics := pd.Indicators
 
-	checkedVTs := 0
+	// checkedVTs := 0
 	vtKEY := os.Getenv("VT_API_KEY")
 	if vtKEY == "" {
 		return
@@ -25,9 +25,9 @@ func CheckPulseDetail(pd *otxapi.PulseDetail) {
 			continue
 		}
 
-		if checkedVTs >= 4 {
-			return
-		}
+		// if checkedVTs >= 4 {
+		// 	return
+		// }
 
 		vtclient := vt.NewClient(vtKEY)
 		file, err := vtclient.GetObject(vt.URL("files/" + *k.Indicator))
@@ -45,6 +45,6 @@ func CheckPulseDetail(pd *otxapi.PulseDetail) {
 
 		*pd.Indicators[i].Description = lsd.String()
 
-		checkedVTs++
+		// checkedVTs++
 	}
 }
