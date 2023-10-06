@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+{{template "partials/header"}}
+
+<body>
+  {{template "partials/menu"}}
+
+
+  {{range .Pulses}}
+
+  <ul>
+    <li>ID: {{.ID}}</li>
+    <li>Author: {{.Author}}</li>
+    <li>Name: {{.Name}}</li>
+    <li>Desc: {{.Description}}</li>
+    <li>Tags: {{.Tags}}</li>
+
+    <li>Refs: </li>
+    {{range .References}}
+    <ul>
+      <li><a href="{{.}}">{{.}}</a></li>
+    </ul>
+    {{end}}
+
+    <li>Hashes: </li>
+    {{range .Indicators}}
+    <ul>
+      {{if .Type}}
+      <li>{{.Type}} : <a href="https://www.virustotal.com/gui/search/{{.Indicator}}">{{.Indicator}}</a></li>
+      {{end}}
+    </ul>
+    {{end}}
+  </ul>
+
+  {{end}}
+</body>
+
+</html>
