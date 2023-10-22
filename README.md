@@ -9,8 +9,7 @@ Show file hashes of subscribed AlienVault feed
 ## Demo
 
 ```bash
-X_OTX_API_KEY=**************************************************************** go run .
+X_OTX_API_KEY=*** VT_API_KEY=*** go run .
 ```
 
-![image](https://github.com/0xF61/oav/assets/16033911/db698f59-0372-4612-a9be-a7a0d82aa443)
-
+![image](https://github.com/0xF61/oav/assets/16033911/f55810b5-8ea1-4f97-81d4-1014ab7a673f)

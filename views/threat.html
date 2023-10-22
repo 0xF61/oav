@@ -5,35 +5,42 @@
 <body>
   {{template "partials/menu"}}
 
+  <div class="card-header">
+    Feed
+  </div>
 
-  {{range .Pulses}}
+  <div class="card-columns">
+    {{range .Pulses}}
 
-  <ul>
-    <li>ID: {{.ID}}</li>
-    <li>Author: {{.Author}}</li>
-    <li>Name: {{.Name}}</li>
-    <li>Desc: {{.Description}}</li>
-    <li>Tags: {{.Tags}}</li>
+    <div class="card border-dark mb-3">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-info">ID: <a href="/pulse/?id={{.ID}}">{{.ID}}</a></li>
+        <li class="list-group-item list-group-item-primary">Author: {{.Author}}</li>
+        <li class="list-group-item list-group-item-success">Name: {{.Name}}</li>
+        <li class="list-group-item list-group-item-dark">Desc: {{.Description}}</li>
+        <li class="list-group-item list-group-item-light">Tags: {{.Tags}}</li>
+        <li class="list-group-item list-group-item-warning">Refs:
+          {{range .References}}
+          <ul>
+            <li><a href="{{.}}">{{.}}</a></li>
+          </ul>
+          {{end}}
+        </li>
 
-    <li>Refs: </li>
-    {{range .References}}
-    <ul>
-      <li><a href="{{.}}">{{.}}</a></li>
-    </ul>
-    {{end}}
-
-    <li>Hashes: </li>
-    {{range .Indicators}}
-    <ul>
-      {{if .Type}}
-      <li>{{.Type}} : <a href="https://www.virustotal.com/gui/search/{{.Indicator}}">{{.Indicator}}</a> {{.Description}}
-      </li>
+        <li class="list-group-item list-group-item-danger">Hashes: </li>
+        {{range .Indicators}}
+        <li class="list-group-item list-group-item-secondary py-0">{{.Type}} : <a
+            href="https://www.virustotal.com/gui/search/{{.Indicator}}">{{.Indicator}}</a>
+          {{.Description}}
+        </li>
+      </ul>
       {{end}}
-    </ul>
+      <div class="card-footer"> </div>
+    </div>
     {{end}}
-  </ul>
+  </div>
 
-  {{end}}
+  {{template "partials/footer"}}
 </body>
 
 </html>

@@ -5,35 +5,37 @@
 <body>
   {{template "partials/menu"}}
 
+  <div class="card border-dark mb-3">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">ID: {{.ID}}</li>
+      <li class="list-group-item list-group-item-primary">Author: {{.Author}}</li>
+      <li class="list-group-item list-group-item-success">Name: {{.Name}}</li>
+      <li class="list-group-item list-group-item-dark">Desc: {{.Description}}</li>
+      <li class="list-group-item list-group-item-light">Tags: {{.Tags}}</li>
+      <li class="list-group-item list-group-item-warning">Refs:
+        {{range .References}}
+        <ul>
+          <li><a href="{{.}}">{{.}}</a></li>
+        </ul>
+        {{end}}
+      </li>
 
-
-  <ul>
-    <li>ID: {{.ID}}</li>
-    <li>Author: {{.Author}}</li>
-    <li>Name: {{.Name}}</li>
-    <li>Desc: {{.Description}}</li>
-    <li>Tags: {{.Tags}}</li>
-
-    <li>Refs: </li>
-    {{range .References}}
-    <ul>
-      <li><a href="{{.}}">{{.}}</a></li>
-    </ul>
-    {{end}}
-
-    <li>Hashes: </li>
-    {{range .Indicators}}
-    <ul>
+      <li class="list-group-item list-group-item-danger">Hashes: </li>
+      {{range .Indicators}}
       {{if .Type}}
-      <li>
-        {{.Type}} : <a href="https://www.virustotal.com/gui/search/{{.Indicator}}">{{.Indicator}}</a>
+      <li class="list-group-item list-group-item-secondary py-0">{{.Type}} : <a
+          href="https://www.virustotal.com/gui/search/{{.Indicator}}">{{.Indicator}}</a>
         {{.Description}}
       </li>
-      {{end}}
     </ul>
     {{end}}
-  </ul>
+    {{end}}
+    <div class="card-footer"> </div>
+  </div>
 
+
+
+  {{template "partials/footer"}}
 </body>
 
 </html>

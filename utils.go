@@ -25,9 +25,13 @@ func CheckPulseDetail(pd *otxapi.PulseDetail) {
 			continue
 		}
 
-		// if checkedVTs >= 4 {
-		// 	return
-		// }
+		// Generally good people have some type of duplicate hashes here
+		// Don't waste our limited API calls for found file with other 2 hashes
+		// SHA256 of ********************************
+		// Sample Description is like above for those ones, we can skip I guess
+		if strings.Contains(*k.Description, " of ") {
+			continue
+		}
 
 		vtclient := vt.NewClient(vtKEY)
 		file, err := vtclient.GetObject(vt.URL("files/" + *k.Indicator))
@@ -41,7 +45,9 @@ func CheckPulseDetail(pd *otxapi.PulseDetail) {
 		}
 
 		lsd, err := file.GetTime("last_submission_date")
-		fmt.Printf("err: %v\n", err)
+		if err != nil {
+			fmt.Printf("lsd err: %v\n", err)
+		}
 
 		*pd.Indicators[i].Description = lsd.String()
 

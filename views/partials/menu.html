@@ -1,6 +1,10 @@
-<a href="/">index</a>
-<a href="/info">info</a>
-<form id="form" method="GET" action="/pulse/">
-  <input id="date-txt" type="text" name="id">
-  <input id="search-btn" type="submit" value="Submit">
-</form>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item" role="presentation"><a class="nav-link" href="/">Home</a></li>
+    <li class="nav-item" role="presentation"><a class="nav-link" href="/info">Profile</a></li>
+    <form class="form-inline my-2 my-md-0" method="GET" action="/pulse/">
+      <input name="id" class="form-control mr-sm-3" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </ul>
+</nav>
