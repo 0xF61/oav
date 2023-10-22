@@ -23,6 +23,7 @@ func main() {
 
 	app.Get("/", indexHandler)
 	app.Get("/info", infoHandler)
+	app.Get("/pulse", pulseHandler)
 
 	log.Fatalln(app.Listen(":3000"))
 }

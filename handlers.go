@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 	"strconv"
-	"strings"
 
 	"github.com/AlienVault-OTX/OTX-Go-SDK/src/otxapi"
 	"github.com/gofiber/fiber/v2"
@@ -27,16 +26,16 @@ func indexHandler(c *fiber.Ctx) error {
 		log.Println("Feed Error:", err)
 	}
 
-	for _, pls := range ti.Pulses {
+	// for _, pls := range ti.Pulses {
 
-		for i, ind := range pls.Indicators {
-			if !strings.Contains(*ind.Type, "FileHash") {
-				ind.Type = nil
-				pls.Indicators[i] = ind
-			}
-		}
+	// 	for i, ind := range pls.Indicators {
+	// 		if !strings.Contains(*ind.Type, "FileHash") {
+	// 			ind.Type = nil
+	// 			pls.Indicators[i] = ind
+	// 		}
+	// 	}
 
-	}
+	// }
 
 	return c.Render("threat", ti)
 }
@@ -55,4 +54,23 @@ func infoHandler(c *fiber.Ctx) error {
 	}
 
 	return c.Render("info", user_detail)
+}
+
+func pulseHandler(c *fiber.Ctx) error {
+
+	pulseID := c.Query("id")
+
+	if len(pulseID) != len("65314c8867fe67f4b8e968c5") {
+		c.Redirect("/info")
+	}
+
+	pulseDetail, _, err := client.PulseDetail.Get(pulseID)
+	if err != nil {
+		log.Println("pulseHandler hatasi -> ", err)
+		c.Redirect("/info")
+	}
+
+	CheckPulseDetail(&pulseDetail)
+
+	return c.Render("pulse", pulseDetail)
 }

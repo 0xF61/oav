@@ -6,7 +6,6 @@
   {{template "partials/menu"}}
 
 
-  {{range .Pulses}}
 
   <ul>
     <li>ID: {{.ID}}</li>
@@ -26,14 +25,15 @@
     {{range .Indicators}}
     <ul>
       {{if .Type}}
-      <li>{{.Type}} : <a href="https://www.virustotal.com/gui/search/{{.Indicator}}">{{.Indicator}}</a> {{.Description}}
+      <li>
+        {{.Type}} : <a href="https://www.virustotal.com/gui/search/{{.Indicator}}">{{.Indicator}}</a>
+        {{.Description}}
       </li>
       {{end}}
     </ul>
     {{end}}
   </ul>
 
-  {{end}}
 </body>
 
 </html>
