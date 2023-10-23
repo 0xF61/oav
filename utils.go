@@ -49,7 +49,12 @@ func CheckPulseDetail(pd *otxapi.PulseDetail) {
 			fmt.Printf("lsd err: %v\n", err)
 		}
 
-		*pd.Indicators[i].Description = lsd.String()
+		tvotes, err := file.Get("last_analysis_stats")
+		if err != nil {
+			fmt.Printf("tvotes: %v\n", tvotes)
+		}
+
+		*pd.Indicators[i].Description = lsd.String() + fmt.Sprintf("%+v", tvotes)
 
 		// checkedVTs++
 	}
